@@ -20,7 +20,8 @@ public class ImageLabelMatchingGame extends JFrame {
 
     private List<ImageLabelPair> imageLabelPairs;
     private int currentIndex;
-
+    private JButton playAgainButton;
+    private JButton exitButton;
     private JLabel imageLabel;
     private JComboBox<String> labelComboBox;
     private JButton nextButton;
@@ -50,6 +51,38 @@ public class ImageLabelMatchingGame extends JFrame {
 
 
         setLayout(new GridBagLayout());
+
+
+        playAgainButton = new JButton("Play Again");
+        playAgainButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                resetGame();
+            }
+        });
+
+        exitButton = new JButton("Exit");
+        exitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
+
+        GridBagConstraints exitButtonGbc = new GridBagConstraints();
+        exitButtonGbc.gridx = 1;
+        exitButtonGbc.gridy = 4;
+        exitButtonGbc.fill = GridBagConstraints.HORIZONTAL;
+        exitButton.setVisible(false);
+        add(exitButton, exitButtonGbc);
+
+        GridBagConstraints playAgainButtonGbc = new GridBagConstraints();
+        playAgainButtonGbc.gridx = 0;
+        playAgainButtonGbc.gridy = 4;
+        playAgainButtonGbc.fill = GridBagConstraints.HORIZONTAL;
+        playAgainButton.setVisible(false);
+        add(playAgainButton, playAgainButtonGbc);
+
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 1;
         gbc.gridy = 0;
@@ -88,6 +121,17 @@ public class ImageLabelMatchingGame extends JFrame {
         showNextPair();
     }
 
+    private void resetGame() {
+        score = 0;
+        updateScoreLabel();
+        Collections.shuffle(imageLabelPairs);
+        currentIndex = 0;
+        showNextPair();
+        playAgainButton.setVisible(false); 
+        exitButton.setVisible(false);
+        
+    }
+
     private void showNextPair() {
         if (currentIndex < imageLabelPairs.size()) {
 
@@ -104,8 +148,14 @@ public class ImageLabelMatchingGame extends JFrame {
 
 
         } else {
-            JOptionPane.showMessageDialog(this, "Game Over! You've completed all pairs.");
-            System.exit(0);
+            //JOptionPane.showMessageDialog(this, "Game Over! You've completed all pairs.");
+            
+            //display score
+            JOptionPane.showMessageDialog(this, "Game Over! \nYour final score is: " + score);
+            //add play again button. 
+            playAgainButton.setVisible(true);
+            exitButton.setVisible(true);
+            //System.exit(0);
         }
     }
 
