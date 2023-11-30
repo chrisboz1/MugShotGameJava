@@ -130,8 +130,8 @@ public class ImageLabelMatchingGame extends JFrame {
 
     private List<ImageLabelPair> loadImagesAndLabels() {
         List<ImageLabelPair> pairs = new ArrayList<>();
-        File imageFolder = new File("C:\\Users\\chris\\Desktop\\Matching Game Java\\images");
-        File labelFolder = new File("C:\\Users\\chris\\Desktop\\Matching Game Java\\labels");
+        File imageFolder = new File("/Users/dylan/IdeaProjects/MugShotGameJava/images");
+        File labelFolder = new File("/Users/dylan/IdeaProjects/MugShotGameJava/labels");
 
         File[] imageFiles = imageFolder.listFiles();
         File[] labelFiles = labelFolder.listFiles();
@@ -219,30 +219,6 @@ public class ImageLabelMatchingGame extends JFrame {
             return fileName.substring(0, lastDotIndex);
         } else {
             return fileName;
-        }
-    }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            new ImageLabelMatchingGame().setVisible(true);
-        });
-    }
-
-    private static class ImageLabelPair {
-        private String imagePath;
-        private String label;
-
-        public ImageLabelPair(String imagePath, String label) {
-            this.imagePath = imagePath;
-            this.label = label;
-        }
-
-        public String getImagePath() {
-            return imagePath;
-        }
-
-        public String getLabel() {
-            return label;
         }
     }
 }
